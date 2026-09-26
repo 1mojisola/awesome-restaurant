@@ -37,7 +37,28 @@ const DEFAULT_DATA = {
   customSections: []
 };
 
-function loadData(){ try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || DEFAULT_DATA; } catch { return DEFAULT_DATA; } }
+
+function loadData(){
+  try {
+    const raw = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!raw) return DEFAULT_DATA;
+    return {
+      ...DEFAULT_DATA,
+      ...raw,
+      colors: {...DEFAULT_DATA.colors, ...(raw.colors || {})},
+      announcement: {...DEFAULT_DATA.announcement, ...(raw.announcement || {})},
+      celebration: {...DEFAULT_DATA.celebration, ...(raw.celebration || {})},
+      seo: {...DEFAULT_DATA.seo, ...(raw.seo || {})},
+      socials: {...DEFAULT_DATA.socials, ...(raw.socials || {})},
+      services: Array.isArray(raw.services) ? raw.services : DEFAULT_DATA.services,
+      menu: Array.isArray(raw.menu) ? raw.menu : DEFAULT_DATA.menu,
+      gallery: Array.isArray(raw.gallery) ? raw.gallery : DEFAULT_DATA.gallery,
+      customSections: Array.isArray(raw.customSections) ? raw.customSections : DEFAULT_DATA.customSections
+    };
+  } catch {
+    return DEFAULT_DATA;
+  }
+}
 function saveData(data){ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
 function waLink(number, message='Hello Awesome Restaurant, I’d like to make an enquiry.') { const digits=(number||'').replace(/\D/g,''); return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`; }
 function useSiteData(){ const [data,setData]=useState(loadData); useEffect(()=>saveData(data),[data]); return [data,setData]; }
