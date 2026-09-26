@@ -4,7 +4,7 @@ import { ArrowRight, Check, ChevronDown, ChevronUp, Clock, ExternalLink, Faceboo
 import './styles.css';
 
 const STORAGE_KEY = 'awesome-restaurant-site-v2';
-const ADMIN_PASSWORD = 'CHANGE_ME_2026';
+const ADMIN_PASSWORD = 'Awesomeres126';
 
 const img = (id, w=1200) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=82`;
 const DEFAULT_DATA = {
