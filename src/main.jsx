@@ -1,6 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { createRoot } from 'react-dom/client';
-import { ArrowRight, Check, ChevronDown, ChevronUp, Clock, ExternalLink, Facebook, Image as ImageIcon, Instagram, Lock, MapPin, Menu as MenuIcon, MessageCircle, Minus, Phone, Plus, Save, Settings, Sparkles, Trash2, Utensils, X } from 'lucide-react';
+import { ArrowRight, Check, ChevronDown, ChevronUp, Clock, ExternalLink, Image as ImageIcon, Lock, MapPin, Menu as MenuIcon, MessageCircle, Minus, Phone, Plus, Save, Settings, Sparkles, Trash2, Utensils, X } from "lucide-react";
 import './styles.css';
 
 const STORAGE_KEY = 'awesome-restaurant-site-v2';
