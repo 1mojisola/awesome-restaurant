@@ -117,4 +117,25 @@ function CelebrationAdmin({data,update}){return <div className="admin-card"><lab
 function CustomAdmin({data,setData}){const [editing,setEditing]=useState(null);return <div className="admin-card"><button className="btn primary" onClick={()=>setEditing({id:'',label:'CUSTOM SECTION',title:'',text:'',image:'',buttonText:'',buttonUrl:''})}><Plus size={16}/> Add custom section</button><p className="muted">Use this for announcements, promotions, private dining, testimonials, new services or any extra content you want on the page.</p><div className="admin-list">{data.customSections.map(s=><div className="list-row" key={s.id}><div><strong>{s.title}</strong><small>{s.label}</small></div><button onClick={()=>setEditing({...s})}>Edit</button><button className="danger" onClick={()=>setData(d=>({...d,customSections:d.customSections.filter(x=>x.id!==s.id)}))}><Trash2 size={15}/></button></div>)}</div>{editing&&<Modal title="Custom section" onClose={()=>setEditing(null)}><div className="form-grid"><Field label="Small label" value={editing.label} onChange={v=>setEditing({...editing,label:v})}/><Field label="Title" value={editing.title} onChange={v=>setEditing({...editing,title:v})}/><Field label="Text" value={editing.text} onChange={v=>setEditing({...editing,text:v})} textarea/><Field label="Image URL (optional)" value={editing.image} onChange={v=>setEditing({...editing,image:v})}/><Field label="Button text (optional)" value={editing.buttonText} onChange={v=>setEditing({...editing,buttonText:v})}/><Field label="Button URL (optional)" value={editing.buttonUrl} onChange={v=>setEditing({...editing,buttonUrl:v})}/></div><button className="btn primary" onClick={()=>{setData(d=>({...d,customSections:editing.id?d.customSections.map(x=>x.id===editing.id?editing:x):[...d.customSections,{...editing,id:crypto.randomUUID()}]}));setEditing(null)}}>Save section</button></Modal>}</div>}
 function Modal({title,onClose,children}){return <div className="modal-backdrop"><div className="modal"><div className="modal-head"><h2>{title}</h2><button onClick={onClose}><X/></button></div>{children}</div></div>}
 
+window.addEventListener("error", (event) => {
+  document.body.innerHTML = `
+    <div style="padding:24px;font-family:monospace;white-space:pre-wrap;color:#b91c1c">
+      <h2>Website Error</h2>
+      ${event.message}
+      \n\n${event.filename || ""}
+      \nLine: ${event.lineno || ""}
+      \nColumn: ${event.colno || ""}
+    </div>
+  `;
+});
+
+window.addEventListener("unhandledrejection", (event) => {
+  document.body.innerHTML = `
+    <div style="padding:24px;font-family:monospace;white-space:pre-wrap;color:#b91c1c">
+      <h2>Website Error</h2>
+      ${event.reason?.stack || event.reason || "Unknown error"}
+    </div>
+  `;
+});
+
 createRoot(document.getElementById('root')).render(<App/>);
