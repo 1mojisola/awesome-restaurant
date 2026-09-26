@@ -1,3 +1,4 @@
+import { createRoot } from "react-dom/client";
 import { useEffect, useState } from "react";
 import { ArrowRight, Check, ChevronDown, ChevronUp, Clock, ExternalLink, Image as ImageIcon, Lock, MapPin, Menu as MenuIcon, MessageCircle, Minus, Phone, Plus, Save, Settings, Sparkles, Trash2, Utensils, X } from "lucide-react";
 import './styles.css';
